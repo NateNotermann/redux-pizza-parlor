@@ -30,7 +30,7 @@ const pizzaCart = (state = [], action) => {
 
 const orderForm = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_ORDER':
+        case 'ADD_DETAILS':
             return action.payload;
         default:
             return state;
