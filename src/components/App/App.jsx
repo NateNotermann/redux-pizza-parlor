@@ -2,6 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 
+//components
+import PizzaCheckout from '../PizzaCheckout/PizzaCheckout';
+import PizzaForm from '../PizzaForm/PizzaForm';
+import PizzaList from '../PizzaList/PizzaList';
+
 function App() {
 
   return (
