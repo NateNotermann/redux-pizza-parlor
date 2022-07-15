@@ -1,3 +1,4 @@
+
 import React from 'react';
 import axios from 'axios';
 import './App.css';
@@ -6,19 +7,17 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-
 //components
-import PizzaCheckout from '../PizzaCheckout/PizzaCheckout';
-import PizzaForm from '../PizzaForm/PizzaForm';
-import PizzaList from '../PizzaList/PizzaList';
+// import PizzaCheckout from "../PizzaCheckout/PizzaCheckout";
+import PizzaForm from "../PizzaForm/PizzaForm";
+import PizzaList from "../PizzaList/PizzaList";
 
 function App() {
-
 
   const pizzaList = useSelector(store => store.pizzaList);
   const dispatch = useDispatch();
   
-  // ---- GET PIZZALIST ----
+  // ---- GET PIZZA LIST ----
   const getPizzaList = () => {
     axios.get('/api/pizza')
     .then(response => {
@@ -60,22 +59,31 @@ function App() {
 
 console.log('total', total)
 // ---- RETURN ----
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Prime Pizza</h1>
+return (
+  <Router>
+    <div className="App">
+    <Route path="/" exact>
+     <header className="App-header">
+        <h1 className="App-title">Prime Pizza</h1>
       </header>
       <p>Cart Total: {total}</p>
       
       <PizzaList addToCart={addToCart} cartList={cartList} />
-
-      <footer>
+      
+            <footer>
        <p>Made with SOOO much love by;
           Miski, Rachel and Nate
       </p> 
       <div className="TD"> and Tim and Diego where there I guess</div>
       </footer>
+    </Route>
+      <Route path="/api/order">
+        < PizzaForm />
+      </Route>
+      <img src="images/pizza_photo.png" />
+      <p>Pizza is great.</p>
     </div>
+  </Router>
   );
 }
 
