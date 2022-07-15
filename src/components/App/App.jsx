@@ -35,12 +35,21 @@ function App() {
   }
 
   const [cartList, setCartList] = useState([]);
-
+  const [total, setTotal] = useState(0);
 // ADD TO CART
   const addToCart = (pizza) => {
     console.log('pizza in addToCart', pizza);
     setCartList([...cartList, pizza]);
     console.log('cartList in addToCart', cartList)
+
+    console.log(Number(pizza.price))
+    // let priceConvert = Number(pizza.price);
+    // console.log('should be a number now:', priceConvert);
+    // setTotal = (priceConvert + total).toFixed(2);
+    // console.log('Total should now be 2 decimal:', setTotal);
+    setTotal(Number(pizza.price) + total)
+    // (total).toFixed(2)
+    console.log('total', total)
   }
 
   // ---- USE-EFFECT ----
@@ -49,13 +58,14 @@ function App() {
   }, [] );
 
 
-
+console.log('total', total)
 // ---- RETURN ----
   return (
     <div className='App'>
       <header className='App-header'>
         <h1 className='App-title'>Prime Pizza</h1>
       </header>
+      <p>Cart Total: {total}</p>
   
       <PizzaList addToCart={addToCart} cartList={cartList} />
 
