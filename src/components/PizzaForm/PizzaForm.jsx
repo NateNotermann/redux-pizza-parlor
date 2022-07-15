@@ -3,11 +3,12 @@ import { useState } from "react";
 import {useDispatch} from "react-redux";
 
 function PizzaForm() {
-    const [name, setName] = useState('');
-    const [streetAddress, setStreetAddress] = useState('');
+    const [customer_name, setName] = useState('');
+    const [street_address, setStreetAddress] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [type, setType] = useState('');
+
 
     // TODO bring states the price and pizza
 
@@ -17,20 +18,25 @@ function PizzaForm() {
     const handlePickRadio = () => {
         console.log('in handlePickRadio');
 
+        if (type === 'pickup'){
+          setType('');
+        }
         // TODO: handle state of type
-        setType(value);
+        setType('pickup')
+
     }
 
 
     // handle the state of radio button
     const handleDelRadio = (event) => {
-        // prevent reload
-        event.preventDefault();
-
         console.log('in handleRadio')
 
+        if (type === 'delivery'){
+          setType('');
+        }
         // TODO: handle state of type
-        setType(value);
+        setType('delivery')
+
     }
 
     const handleSubmit = (event) => {
@@ -38,13 +44,14 @@ function PizzaForm() {
         event.preventDefault();
 
         console.log('in handleSubmit')
-        
-        axios.post('/api/order', {name, streetAddress, city, zip, type})
-        .then((reponse) => {
+        console.log(customer_name, street_address, city, zip, type)
+        axios.post('/api/order', {customer_name, street_address, city, zip, type})
+        .then((response) => {
+          console.log(response)
             dispatch({
                 type: 'ADD_DETAILS',
                 // data: {name, streetAddress, city, zip, type, total, pizzas}
-                data: {name, streetAddress, city, zip, type}
+                payload: {customer_name, street_address, city, zip, type}
             })
         })
         .catch((error) => {
@@ -57,18 +64,18 @@ function PizzaForm() {
 
     <>
       <h2>Customer Information</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           <input 
           placeholder="name"
-          value={name}
+          value={customer_name}
           onChange={(event) => setName(event.target.value)}
           />
         </label>
         <label>
           <input 
           placeholder="Street Address"
-          value={streetAddress}
+          value={street_address}
           onChange={(event) => setStreetAddress(event.target.value)}
           />
         </label>
@@ -87,14 +94,14 @@ function PizzaForm() {
           />
         </label>
         <label>
-            <button type="radio" onClick={handlePickRadio} value="pickup"></button>
+            <input type="radio" onChange={handlePickRadio} name = "deliveryOption" checked={type === "pickup"} value="pickup"/>
             Pickup
         </label>
         <label>
-            <button type="radio" onClick={handleDelRadio} value="delivery"></button>
+            <input type="radio" onChange={handleDelRadio} name = "deliveryOption" checked={type === "delivery"} value="delivery"/>
             Delivery
         </label>
-        <button type="submit" onClick={handleSubmit}>NEXT</button>
+        <button type="submit">NEXT</button>
       </form>
     </>
   );
