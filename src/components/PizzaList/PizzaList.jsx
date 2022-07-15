@@ -1,22 +1,21 @@
 import axios from 'axios';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 
-function PizzaList() {
+function PizzaList({addToCart, cartList}) {
 
 const pizzaList = useSelector(store => store.pizzaList);
 
-const [cartList, setCartList] = useState([]);
+// const [cartList, setCartList] = useState([]);
 console.log('cartList', cartList)
 
-const addToCart = (pizza) => {
-console.log('pizza in addToCart', pizza);
-setCartList([...cartList, pizza]);
-console.log('cartList in addToCart', cartList)
+// const addToCart = (pizza) => {
+// console.log('pizza in addToCart', pizza);
+// setCartList([...cartList, pizza]);
+// console.log('cartList in addToCart', cartList)
 
-}
+
 
 
     return(
