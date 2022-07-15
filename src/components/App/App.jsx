@@ -4,6 +4,8 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useState } from 'react';
+
 
 //components
 import PizzaCheckout from '../PizzaCheckout/PizzaCheckout';
@@ -32,6 +34,15 @@ function App() {
     
   }
 
+  const [cartList, setCartList] = useState([]);
+
+// ADD TO CART
+  const addToCart = (pizza) => {
+    console.log('pizza in addToCart', pizza);
+    setCartList([...cartList, pizza]);
+    console.log('cartList in addToCart', cartList)
+  }
+
   // ---- USE-EFFECT ----
   useEffect(() => {
     getPizzaList();
@@ -46,7 +57,7 @@ function App() {
         <h1 className='App-title'>Prime Pizza</h1>
       </header>
   
-      <PizzaList />
+      <PizzaList addToCart={addToCart} cartList={cartList} />
 
 
     </div>
