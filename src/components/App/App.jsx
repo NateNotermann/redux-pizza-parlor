@@ -67,7 +67,15 @@ return (
         <h1 className="App-title">Prime Pizza</h1>
       </header>
       <p>Cart Total: {total}</p>
+      
       <PizzaList addToCart={addToCart} cartList={cartList} />
+      
+            <footer>
+       <p>Made with SOOO much love by;
+          Miski, Rachel and Nate
+      </p> 
+      <div className="TD"> and Tim and Diego where there I guess</div>
+      </footer>
     </Route>
       <Route path="/api/order">
         < PizzaForm />
