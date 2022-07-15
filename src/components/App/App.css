@@ -3,13 +3,36 @@
 }
 
 .App-header {
-  background-color: #222;
+  background: linear-gradient(45deg, hotpink, orange);
   height: 70px;
   padding: 20px;
-  color: white;
+  color: blue;
   margin-bottom: 20px;
 }
 
 .App-title {
   font-size: 2em;
 }
+
+
+img {
+  width: 250px;
+}
+
+.pizza {
+  position: relative;
+  margin: 50px;
+  padding: 10px;
+  border: 5px solid hotpink;
+  width: 250px;
+}
+
+.TD {
+  color: red;
+  font-size: .3em;
+}
+footer {
+  color: black
+}
+
+
